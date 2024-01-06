@@ -1,0 +1,70 @@
+@extends("admin.layout.extension")
+
+@section("content")
+<div class="col-10 offset-2  mt-5">
+            <div class="col-md-10">
+              <div class="card">
+                <!-- alert start -->
+                @if(session("status"))
+              <div class="alert alert-success alert-dismissible fade show border-collapse" role="alert">
+                <strong>Status!</strong> {{ session("status") }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
+
+              @if(session("pass-error"))
+              <div class="alert alert-danger alert-dismissible fade show border-collapse" role="alert">
+                <strong>Status!</strong> {{ session("pass-error") }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
+              <!-- alert end -->
+                <div class="card-header p-2">
+                  <legend class="text-center">User Profile</legend>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="active tab-pane p-5" id="activity">
+                      <form class="form-horizontal" action="{{ route('admin#changePassword') }}" method="post">
+                        @csrf
+                        <div class="form-group row">
+                          <label for="inputName" class="col-sm-2 col-form-label">Old Password</label>
+                          <div class="col-sm-10">
+                            <input name="oldpassword" type="password" class="form-control shadow border-0" id="inputbox" placeholder="old password" >
+                            @error("oldpassword") <small class="text-danger"> {{ $message }} </small>  @enderror
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputEmail" class="col-sm-2 col-form-label">New Password</label>
+                          <div class="col-sm-10">
+                            <input name="newpassword" type="password" class="form-control shadow border-0" id="inputbox" placeholder="new password">
+                            @error("newpassword") <small class="text-danger"> {{ $message }} </small>  @enderror
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="inputEmail" class="col-sm-2 col-form-label">Comfirm Password</label>
+                          <div class="col-sm-10">
+                            <input name="comfirmpassword" type="password" class="form-control shadow border-0" id="inputbox" placeholder="comfirm password" >
+                            @error("comfirmpassword") <small class="text-danger"> {{ $message }} </small>  @enderror
+                          </div>
+                        </div>
+
+
+                        <div class="form-group row ms-3">
+                          <div class="offset-sm-4 col-sm-6 mt-4">
+                            <button type="submit" id="button">Change Password</button>
+                          </div>
+                        </div>
+
+                        <a href="{{ route('admin#profilePage') }}">Back to </a>
+                      </form>
+                      
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+@endsection
